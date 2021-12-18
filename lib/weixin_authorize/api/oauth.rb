@@ -39,6 +39,11 @@ module WeixinAuthorize
         WeixinAuthorize.http_get_without_token("/sns/userinfo?access_token=#{oauth_token}&openid=#{openid}&lang=#{lang}", {}, "api")
       end
 
+      # 小程序授权获取code，通过code拉取用户信息了。
+      def get_mini_oauth_access_token(code)
+        WeixinAuthorize.http_get_without_token("/sns/jscode2session?appid=#{app_id}&secret=#{app_secret}&code=#{code}&grant_type=authorization_code", {}, api)
+      end
+
       private
 
         def encode_url(uri)
