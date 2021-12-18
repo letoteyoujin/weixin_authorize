@@ -6,18 +6,18 @@ module WeixinAuthorize
 
       # 获取用户手机号相关信息
       def get_phone(code)
-        body = { code: code }
-        http_post(phone_base_url, body)
+        body = { code: code, access_token: get_access_token }
+        http_post(phone_base_url, body, {}, 'api')
       end
 
       def get_plugin_openpid(code)
-        body = { code: code }
-        http_post(phone_base_url, body)
+        body = { code: code, access_token: get_access_token }
+        http_post('/wxa/getpluginopenpid', body, {}, 'api')
       end
 
       def check_encrypted(encrypted_msg_hash)
-        body = { encrypted_msg_hash: encrypted_msg_hash }
-        http_post(phone_base_url, body)
+        body = { encrypted_msg_hash: encrypted_msg_hash, access_token: get_access_token }
+        http_post('/wxa/business/checkencryptedmsg', body, {}, 'api')
       end
 
       private
