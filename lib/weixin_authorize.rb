@@ -12,6 +12,7 @@ require "weixin_authorize/config"
 require "weixin_authorize/handler"
 require "weixin_authorize/api"
 require "weixin_authorize/client"
+require "weixin_authorize/sign"
 
 module WeixinAuthorize
 

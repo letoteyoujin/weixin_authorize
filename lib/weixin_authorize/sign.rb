@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "monitor"
 module WeixinAuthorize
   class Sign
     def self.hexdigest(token, timestamp, nonce, msg_encrypt)
