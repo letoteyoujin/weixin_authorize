@@ -29,6 +29,18 @@ module WeixinAuthorize
         http_post("/message/template/send", msg)
       end
 
+      # 发送小程序模板消息
+      def send_mini_subscribe_template_msg(touser, template_id, page, data, miniprogram_state = 'formal', lang = 'zh_CN')
+        msg = {
+          touser: touser,
+          template_id: template_id,
+          page: page,
+          data: data,
+          miniprogram_state: miniprogram_state,
+          lang: lang
+        }
+        http_post("/message/subscribe/send", msg)
+      end
     end
   end
 end
