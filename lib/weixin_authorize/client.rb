@@ -17,6 +17,7 @@ module WeixinAuthorize
     include Api::Mass
     include Api::Oauth
     include Api::Template
+    include Api::Message
     include Api::MiniUser
 
     attr_accessor :app_id, :app_secret, :expired_at # Time.now + expires_in
