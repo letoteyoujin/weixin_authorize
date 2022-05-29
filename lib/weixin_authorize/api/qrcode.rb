@@ -60,7 +60,7 @@ module WeixinAuthorize
             line_color: line_color,
             env_version: env_version
           },
-          nil,
+          {},
           CUSTOM_ENDPOINT
         )
       end
@@ -79,7 +79,7 @@ module WeixinAuthorize
             line_color: line_color,
             env_version: env_version
           },
-          nil,
+          {},
           CUSTOM_ENDPOINT
         )
       end
