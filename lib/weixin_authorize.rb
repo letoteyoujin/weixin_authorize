@@ -48,23 +48,25 @@ module WeixinAuthorize
       if endpoint == "plain" || endpoint == CUSTOM_ENDPOINT
         post_body = JSON.dump(post_body)
       end
-      ap post_body
-      ap url_params
       load_json(resource(post_api_url).post(post_body, params: url_params))
     end
 
     def resource(url)
-      ap url
-      ap rest_client_options
       RestClient::Resource.new(url, rest_client_options)
     end
 
     # return hash
     def load_json(string)
-      puts string.inspect
-      result_hash = JSON.parse(string.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
-      code   = result_hash.delete("errcode")
-      en_msg = result_hash.delete("errmsg")
+      case string.headers[:content_type]
+      when "image/jpeg"
+        result_hash = { data: string.body }
+        code = OK_CODE
+        en_msg = nil
+      else
+        result_hash = JSON.parse(string.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
+        code   = result_hash.delete("errcode")
+        en_msg = result_hash.delete("errmsg")
+      end
       ResultHandler.new(code, en_msg, result_hash)
     end
 
