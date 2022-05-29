@@ -19,7 +19,6 @@ module WeixinAuthorize
         http_post(qrcode_base_url, qrcode_infos)
       end
 
-
       # 永久二维码
       # options: scene_id, scene_str
       def create_qr_limit_scene(options)
@@ -42,6 +41,47 @@ module WeixinAuthorize
       # 通过ticket换取二维码, 直接访问即可显示！
       def qr_code_url(ticket)
         WeixinAuthorize.mp_endpoint("/showqrcode?ticket=#{ticket}")
+      end
+
+      # 获取小程序二维码
+      def mini_create_qrcode(path, width)
+        http_post("wxaapp/createwxaqrcode", { path: path, width: width })
+      end
+
+      # 获取小程序二维码
+      def mini_qrcode(path, width = 430, is_hyaline = false, auto_color = false, line_color = {"r":0,"g":0,"b":0}, env_version = 'release')
+        http_post(
+          "https://api.weixin.qq.com/wxa/getwxacodes",
+          {
+            path: path,
+            width: width,
+            is_hyaline: is_hyaline,
+            auto_color: auto_color,
+            line_color: line_color,
+            env_version: env_version
+          },
+          nil,
+          CUSTOM_ENDPOINT
+        )
+      end
+
+      # 获取小程序二维码
+      def mini_unlimit_qrcode(path, scene, check_path = true, width = 430, is_hyaline = false, auto_color = false, line_color = {"r":0,"g":0,"b":0}, env_version = 'release')
+        http_post(
+          "https://api.weixin.qq.com/wxa/getwxacodeunlimit",
+          {
+            path: path,
+            scene: scene,
+            check_path: check_path,
+            width: width,
+            is_hyaline: is_hyaline,
+            auto_color: auto_color,
+            line_color: line_color,
+            env_version: env_version
+          },
+          nil,
+          CUSTOM_ENDPOINT
+        )
       end
 
       private
