@@ -57,10 +57,12 @@ module WeixinAuthorize
 
     # return hash
     def load_json(string)
+      ap string
+      ap string.inspect
       if string.is_a?(IO::Buffer)
         result_hash = { data: string }
         code = OK_CODE
-        en_msg = nil``
+        en_msg = nil
       else
         result_hash = JSON.parse(string.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
         code   = result_hash.delete("errcode")
