@@ -48,10 +48,14 @@ module WeixinAuthorize
       if endpoint == "plain" || endpoint == CUSTOM_ENDPOINT
         post_body = JSON.dump(post_body)
       end
+      ap post_body
+      ap url_params
       load_json(resource(post_api_url).post(post_body, params: url_params))
     end
 
     def resource(url)
+      ap url
+      ap rest_client_options
       RestClient::Resource.new(url, rest_client_options)
     end
 
